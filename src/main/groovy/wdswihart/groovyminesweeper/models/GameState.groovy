@@ -1,17 +1,34 @@
 package wdswihart.groovyminesweeper.models
 
+import com.google.inject.Inject
+import com.google.inject.assistedinject.Assisted
+import com.google.inject.assistedinject.AssistedInject
+import wdswihart.groovyminesweeper.factories.ModelFactory
+
 class GameState {
     private String mPlayer = ''
     private Field mField = null
     private int mScore = 0
     private int mTime = 0
 
-    GameState(String player, int mineCount, int width, int height) {
+    private final ModelFactory mModelFactory
+
+    @AssistedInject
+    GameState(
+            @Assisted String player,
+            @Assisted('gameStateMineCount') int mineCount,
+            @Assisted('gameStateWidth') int width,
+            @Assisted('gameStateHeight') int height,
+            ModelFactory modelFactory) {
         mPlayer = player
-        mField = new Field(width, height, mineCount, null)
+        mModelFactory = modelFactory
+        mField = modelFactory.create(width, height, mineCount, null)
     }
 
-    GameState() {}
+    @AssistedInject
+    GameState(ModelFactory modelFactory) {
+        this('', 0, 0, 0, modelFactory)
+    }
 
     String getPlayer() {
         mPlayer

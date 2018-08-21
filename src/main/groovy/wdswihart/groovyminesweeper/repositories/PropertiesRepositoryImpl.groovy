@@ -20,6 +20,8 @@ class PropertiesRepositoryImpl implements PropertiesRepository {
     private int mHardWidth = 30
     private int mHardHeight = 16
 
+    PropertiesRepositoryImpl() {}
+
     @Override
     double getMinWidth() {
         mMinWidth

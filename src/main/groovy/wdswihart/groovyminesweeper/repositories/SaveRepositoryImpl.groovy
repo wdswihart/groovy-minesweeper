@@ -2,6 +2,8 @@ package wdswihart.groovyminesweeper.repositories
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import wdswihart.groovyminesweeper.factories.ModelFactory
+import wdswihart.groovyminesweeper.factories.ObservableFactory
 import wdswihart.groovyminesweeper.models.Cell
 import wdswihart.groovyminesweeper.models.Field
 import wdswihart.groovyminesweeper.models.GameState
@@ -9,14 +11,21 @@ import wdswihart.groovyminesweeper.utils.ObservableList
 
 @Singleton
 class SaveRepositoryImpl implements SaveRepository {
-    private ObservableList<GameState> mGameStates = new ObservableList<>([])
+    private ObservableList<GameState> mGameStates
+
+    private final ModelFactory mModelFactory
+    private final ObservableFactory mObservableFactory
 
     @Inject
-    SaveRepositoryImpl() {
+    SaveRepositoryImpl(ModelFactory modelFactory, ObservableFactory observableFactory) {
+        mModelFactory = modelFactory
+        mObservableFactory = observableFactory
+
+        mGameStates = mObservableFactory.createList([])
         loadData()
     }
 
-    private static Field getFieldFromString(String s) {
+    private Field getFieldFromString(String s) {
         List<List<Cell>> cells = new ArrayList<>()
         def splitLine = s.split(',')
         3.step splitLine.length - 1, 6, { i ->
@@ -30,13 +39,13 @@ class SaveRepositoryImpl implements SaveRepository {
             }
             cells[cell.x] << cell
         }
-        new Field(splitLine[0] as int, splitLine[1] as int, splitLine[2] as int, cells)
+        mModelFactory.create(splitLine[0] as int, splitLine[1] as int, splitLine[2] as int, cells)
     }
 
     private void loadData() {
         try {
             new File('data/saved_games.csv').eachLine('UTF-8') { line ->
-                def state = new GameState()
+                def state = mModelFactory.create()
                 def shouldIgnoreCommas = false
                 def buffer = new StringBuilder()
                 def i = 0
@@ -128,7 +137,7 @@ class SaveRepositoryImpl implements SaveRepository {
     @Override
     void save(GameState state) {
         if (!state.player.isEmpty()) {
-            def copy = new GameState()
+            def copy = mModelFactory.create()
             copy.player = state.player
             copy.field = state.field
             copy.score = state.score

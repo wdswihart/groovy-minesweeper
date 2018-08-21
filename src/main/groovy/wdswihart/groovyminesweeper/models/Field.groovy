@@ -1,8 +1,13 @@
 package wdswihart.groovyminesweeper.models
 
 import com.google.inject.Inject
+import com.google.inject.assistedinject.Assisted
+import com.google.inject.assistedinject.AssistedInject
 import groovy.transform.CompileStatic
 import wdswihart.groovyminesweeper.Main
+import wdswihart.groovyminesweeper.factories.CellFactory
+
+import javax.annotation.Nullable
 
 @CompileStatic
 class Field {
@@ -11,7 +16,16 @@ class Field {
     private int mMineCount
     private List<List<Cell>> mCells
 
-    Field(int width, int height, int mineCount, List<List<Cell>> cells) {
+    private final CellFactory mCellFactory
+
+    @AssistedInject
+    Field(
+            @Assisted('fieldWidth') int width,
+            @Assisted('fieldHeight') int height,
+            @Assisted('fieldMineCount') int mineCount,
+            @Assisted @Nullable List<List<Cell>> cells,
+            CellFactory cellFactory) {
+        mCellFactory = cellFactory
         mWidth = width
         mHeight = height
         mMineCount = mineCount
@@ -22,9 +36,6 @@ class Field {
             mCells = cells
         }
     }
-
-    @Inject
-    Field() {}
 
     private int calcNeighboringMines(int x, int y) {
         def mineCount = 0
@@ -45,7 +56,7 @@ class Field {
         for (int i in 0..(mWidth - 1)) {
             mCells << new ArrayList<>()
             for (int j in 0..(mHeight - 1)) {
-                mCells[i] << new Cell(i, j)
+                mCells[i] << mCellFactory.create(i, j)
             }
         }
     }

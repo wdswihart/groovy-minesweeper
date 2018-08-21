@@ -5,6 +5,8 @@ import com.google.inject.Singleton
 import groovy.transform.CompileStatic
 import javafx.application.Platform
 import javafx.util.Pair
+import wdswihart.groovyminesweeper.factories.ModelFactory
+import wdswihart.groovyminesweeper.factories.ObservableFactory
 import wdswihart.groovyminesweeper.repositories.PropertiesRepository
 import wdswihart.groovyminesweeper.repositories.SaveRepository
 import wdswihart.groovyminesweeper.repositories.ScoreRepository
@@ -14,9 +16,9 @@ import wdswihart.groovyminesweeper.utils.ObservableValue
 @Singleton
 @CompileStatic
 class GameEngineImpl implements GameEngine {
-    private ObservableValue<GameState> mGameState = new ObservableValue<>()
-    private ObservableValue<Boolean> mIsGameOver = new ObservableValue<>(false)
-    private ObservableValue<Boolean> mIsWon = new ObservableValue<>(false)
+    private ObservableValue<GameState> mGameState
+    private ObservableValue<Boolean> mIsGameOver
+    private ObservableValue<Boolean> mIsGameWon
 
     private boolean mIsNewGame = true
     private Timer mTimer
@@ -24,13 +26,23 @@ class GameEngineImpl implements GameEngine {
     private final PropertiesRepository mPropertiesRepository
     private final ScoreRepository mScoreRepository
     private final SaveRepository mSaveRepository
+    private final ObservableFactory mObservableFactory
+    private final ModelFactory mModelFactory
 
     @Inject
     GameEngineImpl(PropertiesRepository propertiesRepository, ScoreRepository scoreRepository,
-                   SaveRepository saveRepository) {
+                   SaveRepository saveRepository, ObservableFactory observableFactory,
+                   ModelFactory modelFactory) {
         mPropertiesRepository = propertiesRepository
         mScoreRepository = scoreRepository
         mSaveRepository = saveRepository
+        mObservableFactory = observableFactory
+        mModelFactory = modelFactory
+
+        mGameState = mObservableFactory.createValue(null)
+        mIsGameOver = mObservableFactory.createValue(false)
+        mIsGameWon = mObservableFactory.createValue(false)
+
         startNewGame('', mPropertiesRepository.defaultMineCount, mPropertiesRepository.defaultWidth,
                 mPropertiesRepository.defaultHeight)
     }
@@ -52,12 +64,12 @@ class GameEngineImpl implements GameEngine {
 
     @Override
     def addWinObserver(Observer o) {
-        mIsWon.addObserver o
+        mIsGameWon.addObserver o
     }
 
     @Override
     boolean getIsGameWon() {
-        mIsWon.value
+        mIsGameWon.value
     }
 
     @Override
@@ -119,10 +131,10 @@ class GameEngineImpl implements GameEngine {
     }
 
     def restart(String player, int mineCount, int width, int height) {
-        mIsWon.value = false
+        mIsGameWon.value = false
         mIsGameOver.value = false
         mIsNewGame = true
-        mGameState.value = new GameState(player, mineCount, width, height)
+        mGameState.value = mModelFactory.create(player, mineCount, width, height)
         mGameState.value.score = 0
         mGameState.value.time = 0
         cancelTimer()
@@ -294,7 +306,7 @@ class GameEngineImpl implements GameEngine {
     }
 
     private def gameWon() {
-        mIsWon.value = true
+        mIsGameWon.value = true
         mGameState.value.field.revealAllMines false
         cancelTimer()
         submitScore()

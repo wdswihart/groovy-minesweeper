@@ -1,14 +1,11 @@
 package wdswihart.groovyminesweeper.utils
 
+
 class ObservableValue<T> extends Observable {
     private T mValue
 
     ObservableValue(T value) {
         mValue = value
-    }
-
-    ObservableValue() {
-        mValue = null
     }
 
     void notifyObserversWithValue() {

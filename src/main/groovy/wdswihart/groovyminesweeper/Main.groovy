@@ -12,6 +12,7 @@ import javafx.stage.Stage
 import javafx.stage.StageStyle
 import wdswihart.groovyminesweeper.controllers.GameViewController
 import wdswihart.groovyminesweeper.controllers.MainWindowController
+import wdswihart.groovyminesweeper.factories.FactoryModule
 import wdswihart.groovyminesweeper.models.GameEngine
 import wdswihart.groovyminesweeper.models.ModelModule
 import wdswihart.groovyminesweeper.repositories.PropertiesRepository
@@ -28,7 +29,11 @@ class Main extends Application implements Observer {
 
     @Override
     void start(Stage primaryStage) throws Exception {
-        mInjector = Guice.createInjector(new RepositoryModule(), new ModelModule(), new ServiceModule())
+        mInjector = Guice.createInjector(
+                new RepositoryModule(),
+                new ModelModule(),
+                new ServiceModule(),
+                new FactoryModule())
         NavigationService navigationService = mInjector.getInstance(NavigationService)
         PropertiesRepository propertiesRepo = mInjector.getInstance(PropertiesRepository.class)
 

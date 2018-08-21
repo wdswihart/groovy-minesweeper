@@ -1,5 +1,8 @@
 package wdswihart.groovyminesweeper.utils
 
+import com.google.inject.assistedinject.Assisted
+import com.google.inject.assistedinject.AssistedInject
+
 class ObservableList<T> extends Observable {
     private List<T> mData
 

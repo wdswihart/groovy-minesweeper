@@ -3,14 +3,20 @@ package wdswihart.groovyminesweeper.repositories
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import javafx.util.Pair
+import wdswihart.groovyminesweeper.factories.ObservableFactory
 import wdswihart.groovyminesweeper.utils.ObservableList
 
 @Singleton
 class ScoreRepositoryImpl implements ScoreRepository {
-    private ObservableList<Pair<String, Integer>> mScores = new ObservableList<>([])
+    private ObservableList<Pair<String, Integer>> mScores
+
+    private ObservableFactory mObservableFactory
 
     @Inject
-    ScoreRepositoryImpl() {
+    ScoreRepositoryImpl(ObservableFactory observableFactory) {
+        mObservableFactory = observableFactory
+
+        mScores = mObservableFactory.createList([])
         loadData()
     }
 
@@ -57,7 +63,7 @@ class ScoreRepositoryImpl implements ScoreRepository {
 
     @Override
     List<Pair<String, Integer>> getScores() {
-        new ArrayList<Pair<String, Integer>>(mScores.data)
+        mScores.data
     }
 
     @Override

@@ -1,5 +1,7 @@
 package wdswihart.groovyminesweeper.models
 
+import com.google.inject.Inject
+import com.google.inject.assistedinject.Assisted
 import groovy.transform.CompileStatic
 
 @CompileStatic
