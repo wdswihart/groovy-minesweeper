@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane alignment="CENTER" stylesheets="@../stylesheets/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wdswihart.groovyminesweeper.controllers.MainMenuController">
+   <columnConstraints>
+      <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" percentWidth="35.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
+      <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" percentHeight="100.0" valignment="CENTER" vgrow="ALWAYS" />
+   </rowConstraints>
+   <children>
+      <VBox alignment="CENTER" fillWidth="false" spacing="15.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS">
+         <children>
+            <VBox alignment="CENTER" fillWidth="false">
+               <children>
+                  <Label styleClass="menu-label" text="High Scores" />
+                  <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="500.0" styleClass="menu-scroll-pane" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox fx:id="mScoreListVBox" alignment="TOP_CENTER" minHeight="180.0" prefHeight="180.0" prefWidth="300.0" spacing="5.0" styleClass="menu-vbox">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" fillWidth="false">
+               <children>
+                  <Label styleClass="menu-label" text="Saved Games" />
+                  <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="500.0" styleClass="menu-scroll-pane" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox fx:id="mSaveListVBox" minHeight="180.0" prefHeight="180.0" prefWidth="300.0" spacing="5.0" styleClass="menu-vbox">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <Button fx:id="mDeleteButton" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menu-button" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Button>
+         </children>
+         <GridPane.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </GridPane.margin>
+      </VBox>
+      <VBox alignment="CENTER" fillWidth="false" spacing="15.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="NEVER">
+         <VBox alignment="CENTER" VBox.vgrow="NEVER">
+            <children>
+               <Label styleClass="menu-label" text="Name" />
+               <TextField fx:id="mNameField" alignment="CENTER" maxWidth="200.0" styleClass="name-text-field" />
+            </children>
+         </VBox>
+         <VBox alignment="CENTER" VBox.vgrow="NEVER">
+            <children>
+               <Label styleClass="menu-label" text="Difficulty" />
+               <HBox alignment="CENTER" spacing="15.0">
+                  <children>
+                     <Button fx:id="mEasyButton" minHeight="40.0" minWidth="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" styleClass="menu-button" />
+                     <Button fx:id="mMediumButton" layoutX="91.0" layoutY="10.0" minHeight="40.0" minWidth="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" styleClass="menu-button" />
+                     <Button fx:id="mHardButton" layoutX="129.0" layoutY="10.0" minHeight="40.0" minWidth="60.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" styleClass="menu-button" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+         <HBox alignment="CENTER" spacing="15.0" VBox.vgrow="NEVER">
+            <children>
+               <VBox alignment="CENTER">
+                  <children>
+                     <Label styleClass="menu-label" text="Mines" />
+                     <Spinner fx:id="mMineSpinner" editable="true" nodeOrientation="RIGHT_TO_LEFT" prefWidth="60.0">
+                        <styleClass>
+                           <String fx:value="menu-spinner" />
+                           <String fx:value="split-arrows-vertical" />
+                        </styleClass>
+                     </Spinner>
+                  </children>
+               </VBox>
+               <VBox alignment="CENTER">
+                  <children>
+                     <Label styleClass="menu-label" text="Width" />
+                     <Spinner fx:id="mWidthSpinner" editable="true" prefWidth="60.0">
+                        <styleClass>
+                           <String fx:value="menu-spinner" />
+                           <String fx:value="split-arrows-vertical" />
+                        </styleClass>
+                     </Spinner>
+                  </children>
+               </VBox>
+               <VBox alignment="CENTER" HBox.hgrow="NEVER">
+                  <children>
+                     <Label styleClass="menu-label" text="Height" />
+                     <Spinner fx:id="mHeightSpinner" editable="true" prefWidth="60.0">
+                        <styleClass>
+                           <String fx:value="menu-spinner" />
+                           <String fx:value="split-arrows-vertical" />
+                        </styleClass>
+                     </Spinner>
+                  </children>
+               </VBox>
+            </children>
+         </HBox>
+         <HBox alignment="CENTER" spacing="15.0" VBox.vgrow="NEVER">
+            <children>
+                <Button fx:id="mPlayButton" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menu-button" />
+               <Button fx:id="mSettingsButton" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="menu-button" />
+            </children>
+         </HBox>
+         <GridPane.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </GridPane.margin>
+      </VBox>
+   </children>
+</GridPane>

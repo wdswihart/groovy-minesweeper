@@ -1,0 +1,18 @@
+# Output directories and files
+build/
+out/
+compiled/
+
+# Gradle files
+.gradle/
+
+# IntelliJ IDEA user-specific files
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+**/.idea/usage.statistics.xml
+**/*.iws
+**/.idea/codeStyles/**
+**/.idea/dictionaries/**
+
+# User files
+data/**

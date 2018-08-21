@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane fx:id="mContentPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="window-pane" stylesheets="@../stylesheets/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wdswihart.groovyminesweeper.controllers.MainWindowController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="70.0" minHeight="70" vgrow="NEVER" />
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
+    <children>
+        <GridPane fx:id="mTitleBar" styleClass="title-bar-pane" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" percentWidth="50" />
+                <ColumnConstraints halignment="RIGHT" percentWidth="50" />
+            <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="100" valignment="CENTER" vgrow="ALWAYS" />
+            </rowConstraints>
+            <children>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+               <children>
+                  <ImageView fx:id="mIconView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="title-icon" />
+                      <Label fx:id="mTitle" alignment="CENTER" contentDisplay="TOP" styleClass="title-label" text="Application Title" />
+               </children>
+            </HBox>
+                <HBox alignment="CENTER_RIGHT" spacing="5.0" styleClass="title-bar-button-hbox" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                    <children>
+                        <Button fx:id="mMinimizeButton" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" styleClass="title-bar-button" />
+                        <Button fx:id="mSizeButton" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" styleClass="title-bar-button" />
+                        <Button fx:id="mExitButton" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" styleClass="title-bar-button" />
+                    </children>
+                </HBox>
+            </children>
+        </GridPane>
+    </children>
+</GridPane>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane stylesheets="@../stylesheets/style.css" visible="false" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wdswihart.groovyminesweeper.controllers.GameViewController">
+   <columnConstraints>
+      <ColumnConstraints percentWidth="100" />
+   </columnConstraints>
+   <rowConstraints>
+       <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+       <RowConstraints maxHeight="70.0" minHeight="70.0" />
+   </rowConstraints>
+   <children>
+      <GridPane fx:id="mFieldPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="field" stylesheets="@../stylesheets/style.css" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+      <GridPane fx:id="mControlsBar" styleClass="controls-bar" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+        <columnConstraints>
+          <ColumnConstraints percentWidth="20" />
+            <ColumnConstraints percentWidth="20.0" />
+            <ColumnConstraints percentWidth="20.0" />
+            <ColumnConstraints percentWidth="20" />
+          <ColumnConstraints percentWidth="20" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints vgrow="ALWAYS" />
+        </rowConstraints>
+         <children>
+            <HBox fx:id="mSmileyImageVBox" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.valignment="BOTTOM" />
+            <HBox alignment="CENTER_LEFT" spacing="15.0" GridPane.halignment="LEFT" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+               <children>
+                  <Button fx:id="mBackButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="control-button" />
+                  <Button fx:id="mRestartButton" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="control-button" />
+               </children>
+            </HBox>
+            <Label fx:id="mTimeLabel" alignment="BASELINE_LEFT" layoutX="240.0" layoutY="32.0" styleClass="time-label" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+            <Label fx:id="mScoreLabel" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" graphicTextGap="0.0" styleClass="score-label" text="Label" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+            <Label fx:id="mStatusLabel" layoutX="139.0" layoutY="37.0" styleClass="status-label" text="Label" textAlignment="RIGHT" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+            <ImageView fx:id="mEmojiView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="emoji-image-view" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+         </children>
+      </GridPane>
+   </children>
+</GridPane>

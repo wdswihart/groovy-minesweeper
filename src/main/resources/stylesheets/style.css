@@ -1,0 +1,294 @@
+@import "themeColors.css"
+
+{
+    primary: dimgray;
+    cell-primary: silver;
+    cell-revealed: derive(cell-primary, -15%);
+    bad-status: red;
+    info-status: black;
+    good-status: lime;
+}
+
+.button {
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+}
+
+.cell {
+    -fx-background-color: cell-primary;
+    -fx-font-weight: bold;
+    -fx-font-family: monospace;
+    -fx-background-radius: 0;
+    -fx-border-color: black;
+}
+.cell:hover {
+    -fx-background-color: derive(cell-primary, 50%);
+}
+.cell:pressed {
+    -fx-background-color: derive(cell-primary, -25%);
+}
+
+.cell-marked {
+    -fx-background-color: cell-marked;
+}
+.cell-marked:hover {
+    -fx-background-color: derive(cell-marked, 50%);
+}
+
+.cell-revealed {
+    -fx-background-color: cell-revealed;
+    -fx-cursor: default;
+}
+.cell-revealed:hover {
+    -fx-background-color: cell-revealed;
+}
+
+.cell-exploded, .cell-has-mine {
+    -fx-padding: 0;
+}
+
+.context-menu {
+    -fx-background-color: derive(primary, 25%);
+    -fx-accent: derive(primary, 50%);
+}
+.context-menu > * > .menu-item > .label {
+    -fx-background-color: transparent !important;
+}
+
+
+.controls-bar {
+    -fx-background-color: primary;
+    -fx-padding: 15;
+}
+
+.control-button {
+    -fx-background-color: accent;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, -2, 2);
+}
+.control-button:hover {
+    -fx-background-color: derive(accent, 50%);
+}
+.control-button:pressed {
+    -fx-background-color: derive(accent, -25%);
+    -fx-effect: dropshadow(gaussian, black, 5, 0.3, -1, 1);
+}
+
+.difficulty-button-selected {
+    -fx-background-color: derive(accent, -25%) !important;
+    -fx-effect: dropshadow(gaussian, black, 5, 0.3, 0, 0) !important;
+    -fx-cursor: default;
+}
+
+.emoji-image-view {
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, 0, 2);
+}
+
+.field {
+    -fx-background-color: primary;
+    -fx-padding: 0 15 0 15;
+}
+
+.menu-list-button {
+    -fx-background-color: accent;
+    -fx-text-fill: ladder(accent, white 50%, black 49%);
+    -fx-font-weight: bold;
+}
+.menu-list-button:hover {
+    -fx-background-color: derive(accent, 50%);
+}
+.menu-list-button:pressed, .menu-list-button-selected {
+    -fx-background-color: derive(accent, -35%);
+    -fx-text-fill: derive(ladder(accent, white 50%, black 49%), -15%);
+}
+.menu-list-button-selected {
+    -fx-cursor: default !important;
+}
+.menu-list-button-selected:hover {
+    -fx-background-color: derive(accent, -35%) !important;
+}
+
+.menu-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, 0, 0);
+}
+.menu-scroll-pane > .scroll-bar {
+   -fx-cursor: hand;
+   -fx-background-color: derive(accent, -25%);
+}
+.menu-scroll-pane > .scroll-bar > .increment-button > .increment-arrow,
+.menu-scroll-pane > .scroll-bar > .decrement-button > .decrement-arrow {
+   -fx-background-color: ladder(accent, white 50%, black 49%);
+}
+.menu-scroll-pane > .scroll-bar > .increment-button > .increment-arrow:pressed,
+.menu-scroll-pane > .scroll-bar > .decrement-button > .decrement-arrow:pressed {
+    -fx-background-color: derive(ladder(accent, white 50%, black 49%), -25%);
+}
+.menu-scroll-pane > .scroll-bar > .increment-button:hover,
+.menu-scroll-pane > .scroll-bar > .decrement-button:hover {
+    -fx-background-color: transparent;
+ }
+.menu-scroll-pane > .scroll-bar > .thumb {
+    -fx-background-color: accent;
+}
+.menu-scroll-pane > .scroll-bar > .thumb:hover {
+    -fx-background-color: derive(accent, 50%);
+}
+.menu-scroll-pane > .scroll-bar > .thumb:pressed {
+   -fx-background-color: derive(accent, -25%);
+}
+.menu-vbox {
+    -fx-background-insets: 0;
+    -fx-background-color: derive(accent, -25%);
+    -fx-alignment: top-center;
+    -fx-spacing: 5;
+    -fx-padding: 5;
+}
+
+.label {
+    -fx-text-fill: ladder(primary, white 50%, black 49%);
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-background-color: accent;
+    -fx-background-radius: 5;
+    -fx-label-padding: 0;
+    -fx-padding: 5;
+}
+
+.menu-button {
+    -fx-background-color: accent;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, 0, 0);
+    -fx-text-fill: ladder(accent, white 50%, black 49%);
+    -fx-font-weight: bold;
+}
+.menu-button:hover {
+    -fx-background-color: derive(accent, 50%);
+}
+.menu-button:pressed {
+    -fx-background-color: derive(accent, -25%);
+    -fx-effect: dropshadow(gaussian, black, 5, 0.3, 0, 0);
+}
+
+.menu-label {
+    -fx-background-color: transparent;
+    -fx-effect:dropshadow(gaussian, black, 10, 0.3, 0, 0);
+}
+
+.menu-spinner {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, 0, 0);
+}
+.menu-spinner > .text-field {
+    -fx-background-color: derive(accent, -25%);
+    -fx-text-fill: ladder(accent, white 50%, black 49%);
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+    -fx-alignment: center;
+    -fx-background-insets: 0, 2;
+}
+.menu-spinner > .text-field:focused {
+    -fx-background-color: derive(accent, 25%), derive(accent, -25%);
+}
+.menu-spinner > .increment-arrow-button {
+    -fx-background-color: accent;
+}
+.menu-spinner > .increment-arrow-button:hover {
+    -fx-background-color: derive(accent, 50%);
+}
+.menu-spinner > .increment-arrow-button:pressed {
+    -fx-background-color: derive(accent, -25%);
+    -fx-text-fill: derive(ladder(accent, white 50%, black 49%), -25%);
+}
+.menu-spinner > .increment-arrow-button > .increment-arrow {
+    -fx-background-color: ladder(accent, white 50%, black 49%);
+}
+.menu-spinner > .decrement-arrow-button {
+    -fx-background-color: accent;
+}
+.menu-spinner > .decrement-arrow-button:hover {
+    -fx-background-color: derive(accent, 50%);
+}
+.menu-spinner > .decrement-arrow-button:pressed {
+    -fx-background-color: derive(accent, -25%);
+    -fx-text-fill: derive(ladder(accent, white 50%, black 49%), -25%);
+}
+.menu-spinner > .decrement-arrow-button > .decrement-arrow {
+    -fx-background-color: ladder(accent, white 50%, black 49%);
+}
+
+.menu-toggle-button:selected {
+    -fx-background-color: derive(accent, -25%);
+    -fx-effect: dropshadow(gaussian, black, 5, 0.3, 0, 0);
+}
+
+.name-text-field {
+    -fx-accent: derive(accent, 25%);
+    -fx-background-color: derive(accent, -25%);
+    -fx-text-fill: ladder(accent, white 50%, black 49%);
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+    -fx-alignment: center;
+    -fx-background-insets: 0, 2;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, 0, 0);
+}
+.name-text-field:focused {
+    -fx-background-color: derive(accent, 25%), derive(accent, -25%);
+}
+
+.score {
+    -fx-background-color: transparent;
+}
+
+.score-label {
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, 1, 2);
+}
+
+.status-label {
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, 2, 2);
+}
+
+.time-label {
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, -1, 2);
+}
+
+.title {
+    -fx-font-size: 28;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, -2, -2);
+}
+
+.title-bar-button {
+    -fx-background-color: accent;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, 2, -2);
+}
+.title-bar-button:hover {
+    -fx-background-color: derive(accent, 50%);
+}
+.title-bar-button:pressed {
+    -fx-background-color: derive(accent, -25%);
+    -fx-effect: dropshadow(gaussian, black, 5, 0.3, 1, -1);
+}
+
+.title-bar-button-hbox {
+    -fx-spacing: 15;
+}
+
+.title-bar-pane {
+    -fx-padding: 15;
+}
+
+.title-icon {
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, -2, -2);
+}
+
+.title-label {
+    -fx-font-size: 24;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.3, -2, -2);
+}
+
+.window-pane {
+    -fx-background-color: primary;
+    -fx-border-color: accent;
+}
