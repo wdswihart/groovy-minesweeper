@@ -66,6 +66,19 @@ class MainMenuController implements Initializable, Observer {
         mSaveRepository.addSavesObserver(this)
         updateSaveList(mSaveRepository.saves)
 
+        mNameField.textProperty().addListener new ChangeListener<String>() {
+            @Override
+            void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                checkSavesForSelection()
+            }
+        }
+
+        setUpActionButtons()
+        setUpDifficultyButtons()
+        setUpSpinners()
+    }
+
+    private void setUpActionButtons() {
         mDeleteButton.setOnAction {
             if (mSelectedItem instanceof Pair<String, Integer>) {
                 mScoreRepository.removeScore(mSelectedItem)
@@ -91,15 +104,18 @@ class MainMenuController implements Initializable, Observer {
         }
         mPlayButton.setGraphic(new ImageView(new Image(getClass()
                 .getResourceAsStream('/images/icons/baseline_play_arrow_white_18dp.png'))))
+    }
+
+    private void setUpDifficultyButtons() {
         ImageView easyImage = new ImageView((new Image(getClass()
                 .getResourceAsStream('/images/icons/easy_meter.png'))))
         easyImage.fitWidthProperty().bind(mEasyButton.widthProperty() * DIFFICULTY_ICON_RATIO)
         easyImage.fitHeightProperty().bind(mEasyButton.heightProperty() * DIFFICULTY_ICON_RATIO)
         mEasyButton.graphic = easyImage
-        mEasyButton.setOnAction() {
+        mEasyButton.setOnAction {
             resetButtons()
             setSpinners(mPropertiesRepository.easyMineCount, mPropertiesRepository.easyWidth,
-                mPropertiesRepository.easyHeight)
+                    mPropertiesRepository.easyHeight)
             mEasyButton.styleClass.add(PRESSED_CLASS)
             mSelectedDifficultyButton = mEasyButton
         }
@@ -110,7 +126,7 @@ class MainMenuController implements Initializable, Observer {
         mediumImage.fitWidthProperty().bind(mMediumButton.widthProperty() * DIFFICULTY_ICON_RATIO)
         mediumImage.fitHeightProperty().bind(mMediumButton.heightProperty() * DIFFICULTY_ICON_RATIO)
         mMediumButton.graphic = mediumImage
-        mMediumButton.setOnAction() {
+        mMediumButton.setOnAction {
             resetButtons()
             setSpinners(mPropertiesRepository.mediumMineCount,
                     mPropertiesRepository.mediumWidth, mPropertiesRepository.mediumHeight)
@@ -123,67 +139,47 @@ class MainMenuController implements Initializable, Observer {
         hardImage.fitWidthProperty().bind(mHardButton.widthProperty() * DIFFICULTY_ICON_RATIO)
         hardImage.fitHeightProperty().bind(mHardButton.heightProperty() * DIFFICULTY_ICON_RATIO)
         mHardButton.graphic = hardImage
-        mHardButton.setOnAction() {
+        mHardButton.setOnAction {
             resetButtons()
             setSpinners(mPropertiesRepository.hardMineCount, mPropertiesRepository.hardWidth,
-                mPropertiesRepository.hardHeight)
+                    mPropertiesRepository.hardHeight)
             mHardButton.styleClass.add(PRESSED_CLASS)
             mSelectedDifficultyButton = mHardButton
         }
+    }
 
-        mNameField.textProperty().addListener(new ChangeListener<String>() {
+    private void setUpSpinners() {
+        def changeListener = new ChangeListener<Integer>() {
             @Override
-            void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+                mPlayButton.requestFocus()
+                resetButtons()
                 checkSavesForSelection()
             }
-        })
+        }
+
+        def scrollEventHandler = { event ->
+            if (event.deltaY > 0) {
+                (event.source as Spinner<Integer>).valueFactory.setValue mHeightSpinner.value + 1
+            } else {
+                (event.source as Spinner<Integer>).valueFactory.setValue mHeightSpinner.value - 1
+            }
+        }
 
         mHeightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
                 mPropertiesRepository.easyHeight, mPropertiesRepository.hardHeight, mPropertiesRepository.defaultHeight))
-        mHeightSpinner.setOnScroll { event ->
-            if (event.deltaY > 0) {
-                mHeightSpinner.valueFactory.setValue mHeightSpinner.value + 1
-            } else {
-                mHeightSpinner.valueFactory.setValue mHeightSpinner.value - 1
-            }
-        }
-        mHeightSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
-            @Override
-            void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-                mPlayButton.requestFocus()
-                resetButtons()
-                checkSavesForSelection()
-            }
-        })
+        mHeightSpinner.setOnScroll scrollEventHandler
+        mHeightSpinner.valueProperty().addListener changeListener
 
         mWidthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(mPropertiesRepository.easyWidth,
                 mPropertiesRepository.hardWidth, mPropertiesRepository.defaultWidth))
-        mWidthSpinner.setOnScroll { event ->
-            if (event.deltaY > 0) {
-                mWidthSpinner.valueFactory.setValue mWidthSpinner.value + 1
-            } else {
-                mWidthSpinner.valueFactory.setValue mWidthSpinner.value - 1
-            }
-        }
-        mWidthSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
-            @Override
-            void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-                mPlayButton.requestFocus()
-                resetButtons()
-                checkSavesForSelection()
-            }
-        })
+        mWidthSpinner.setOnScroll scrollEventHandler
+        mWidthSpinner.valueProperty().addListener changeListener
 
         mMineSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,
                 mPropertiesRepository.hardHeight * mPropertiesRepository.hardWidth,
                 mPropertiesRepository.defaultMineCount))
-        mMineSpinner.setOnScroll { event ->
-            if (event.deltaY > 0) {
-                mMineSpinner.valueFactory.setValue mMineSpinner.value + 1
-            } else {
-                mMineSpinner.valueFactory.setValue mMineSpinner.value - 1
-            }
-        }
+        mMineSpinner.setOnScroll scrollEventHandler
         mMineSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
